@@ -1,0 +1,32 @@
+class Figura():
+    def __init__(self, nombre, color):
+        self._nombre = nombre
+        self._color = color
+        
+class Circulo(Figura):
+    def __init__(self, nombre, color, radio):
+        super().__init__(nombre, color)
+        self._radio = radio
+        
+    def calcularArea(self):
+        area = 3.1416 * (self._radio*self._radio)
+        return f"Área: {area}"
+    
+    def calcularPerimetro(self):
+        diametro = self._radio*2
+        perimetro = diametro * 3.1416
+        return f"Perimetro: {perimetro}"
+    
+    def mostrarInfo(self):
+        return f"Circulo({self._nombre}): \ncolor: {self._color} \nradio: {self._radio}"
+    
+class Rectangulo(Figura):
+    def __init__(self, nombre, color):
+        super().__init__(nombre, color)
+    
+if __name__ == "__main__":
+    circulo1 = Circulo("Rueda", "Rojo", 5)
+    
+    print(circulo1.mostrarInfo())
+    print(circulo1.calcularArea())
+    print(circulo1.calcularPerimetro())
