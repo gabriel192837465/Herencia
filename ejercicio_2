@@ -1,0 +1,58 @@
+class Empleado():
+    def __init__(self, nombre, salario, cargo):
+        self._nombre = nombre
+        self._salario = salario
+        self._cargo = cargo
+
+    def mostrarInfo(self):
+        print(f"Empleado: {self._nombre} \nsalario: US${self._salario} \ncargo: {self._cargo}")
+
+class Gerente(Empleado):
+    def __init__(self, nombre, salario, cargo, he, aguinaldo): #he = Horas Extras
+        super().__init__(nombre, salario, cargo)
+        self._he = he
+        self._aguinaldo = aguinaldo
+
+    def mostrarInfo(self):
+        super().mostrarInfo()
+    
+    def calcularAumento(self):
+        aumento = self._he * 60
+        if (self._aguinaldo):
+            aumentoTotal = (self._salario/2) + aumento
+        else:
+            aumentoTotal = aumento
+
+        salarioTotal = self._salario + aumentoTotal
+        print(f"Aumento: US${aumentoTotal} \nSalario final: US${salarioTotal}")
+    
+class empleadoTemporal(Empleado):
+    def __init__(self, nombre, salario, cargo, semanas):
+        super().__init__(nombre, salario, cargo)
+        self._semanas = semanas
+
+    def mostrarInfo(self):
+        super().mostrarInfo()
+
+    def calcularAumento(self):
+        aumento = 0
+        salarioTotal = self._salario
+
+        if (self._semanas >= 24):
+            aumento = self._salario*0.50
+        elif (self._semanas >= 12):
+            aumento = self._salario*0.30
+        
+        salarioTotal += aumento
+
+        print(f"Aumento: US${aumento} \nSalario final: US${salarioTotal}")
+
+if __name__ == "__main__":
+    gerente1 = Gerente("Gabriel", 4500, "Gerente", 4, True)
+    empleado = empleadoTemporal("Jose", 2000, "Empleado", 12)
+
+    gerente1.mostrarInfo()
+    gerente1.calcularAumento()
+    print()
+    empleado.mostrarInfo()
+    empleado.calcularAumento()
