@@ -1,6 +1,59 @@
 class Vehiculo():
-    def __init__(self, marca, modelo, año, propietario):
+    def __init__(self, nombre, marca, modelo, año, propietario):
+        self._nombre = nombre
         self._marca = marca
         self._modelo = modelo
         self._año = año
         self._propietario = propietario
+    
+    def mostrarInfo(self):
+        print(f"'{self._nombre}': \nMarca: {self._marca} \nModelo: {self._modelo} \nAño: {self._año} \nPropietario: {self._propietario}")
+        
+class Coche(Vehiculo):
+    def __init__(self, marca, modelo, año, propietario):
+        super().__init__("Coche", marca, modelo, año, propietario)
+        
+    def calcularEficiencia(self):
+        distancia = 10 #kilometros
+        combustible = 15 #consumido en litros
+        
+        eficiencia = distancia / combustible
+        return eficiencia
+    
+    def calcularCantidad(self, eficiencia, distancia):
+        combustible = distancia * eficiencia
+        return combustible
+    
+    def mostrarInfo(self):
+        return super().mostrarInfo()
+    
+class Moto(Vehiculo):
+    def __init__(self, marca, modelo, año, propietario):
+        super().__init__("Moto", marca, modelo, año, propietario)
+        
+    def calcularEficiencia(self):
+        distancia = 10 #kilometros
+        combustible = 12 #consumido en litros
+        
+        eficiencia = distancia / combustible
+        return eficiencia
+    
+    def calcularCantidad(self, eficiencia, distancia):
+        combustible = distancia * eficiencia
+        return combustible
+
+    def mostrarInfo(self):
+        return super().mostrarInfo()
+    
+if __name__ == "__main__":
+    vehiculo1 = Coche("Ford", "Palio", 2018, "María")
+    vehiculo2 = Moto("Suzuki", "GSXR 1000R", 2025, "Axel")
+    distanciaViaje = 150 #kilometros
+    
+    vehiculo1.mostrarInfo()
+    v1_eficiencia = vehiculo1.calcularEficiencia()
+    print(f"Eficiencia: {v1_eficiencia} L/Km \nCombustible necesario para viaje: {vehiculo1.calcularCantidad(v1_eficiencia, distanciaViaje)} \n")
+    
+    vehiculo2.mostrarInfo()
+    v2_eficiencia = vehiculo2.calcularEficiencia()
+    print(f"Eficiencia: {v2_eficiencia} L/Km \nCombustible necesario para viaje: {vehiculo2.calcularCantidad(v2_eficiencia, distanciaViaje)}")
