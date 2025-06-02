@@ -1,0 +1,48 @@
+class Persona():
+    def __init__(self, rol, nombre, edad, mail):
+        self._rol = rol
+        self._nombre = nombre
+        self._edad = edad
+        self._mail = mail
+        
+    def mostrarInfo(self):
+        return (f"'{self._rol}' \nNombre: {self._nombre} \nEdad: {self._edad} \nMail: {self._mail}")
+    
+class Profesor(Persona):
+    def __init__(self, nombre, edad, mail, materia):
+        super().__init__("Profesor", nombre, edad, mail)
+        self._materia = materia
+        
+    def asignarRol(self, nuevoRol):
+        antiguoRol = self._rol 
+        self._rol = nuevoRol
+        return (f"El antes '{antiguoRol}' ahora es '{self._rol}'")       
+    
+    def mostrarMateria(self):
+        return (f"Su materia es: {self._materia}") 
+    
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, mail, notas):
+        super().__init__("Estudiante", nombre, edad, mail)
+        self._notas = notas
+        
+    def asignarRol(self, nuevoRol):
+        antiguoRol = self._rol 
+        self._rol = nuevoRol
+        return (f"El antes '{antiguoRol}' ahora es '{self._rol}'")       
+    
+    def mostrarNotas(self):
+        return self._notas
+
+    
+if __name__ == "__main__":
+    persona1 = Profesor("Rodolfo", 56, "rodo@yahoo.com", "Historia")
+    nuevoRol1 = "Preceptor"
+    persona2 = Estudiante ("Pepe", 17, "pepito777@gmail.com", [6, 6, 7, 5, 7])
+    nuevoRol2 = "Tecnico"
+    
+    print (f"{persona1.mostrarInfo()} \n{persona1.mostrarMateria()}")
+    print(persona1.asignarRol(nuevoRol1))
+    
+    print (f"\n{persona2.mostrarInfo()} \nNotas: {persona2.mostrarNotas()}")
+    print(persona2.asignarRol(nuevoRol2))
