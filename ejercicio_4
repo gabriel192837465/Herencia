@@ -1,0 +1,6 @@
+class Vehiculo():
+    def __init__(self, marca, modelo, año, propietario):
+        self._marca = marca
+        self._modelo = modelo
+        self._año = año
+        self._propietario = propietario
