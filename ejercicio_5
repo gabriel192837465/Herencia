@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 class Producto():
     def __init__(self, tipo, nombre, precio, fdv): #fdv = fecha de vencimiento
         self._tipo = tipo
@@ -15,7 +17,8 @@ class productoAlimenticio(Producto):
         
     def descuento(self, fechaActual):
         descuento = 0
-        if ((self._fdv - fechaActual) < 15):
+        dias = (self._fdv - fechaActual).days
+        if (dias < 15):
             descuento += 0.25
         
         if (self._cantidad >= 3):
@@ -34,7 +37,8 @@ class productoElectronico(Producto):
         
     def descuento(self, fechaActual):
         descuento = 0
-        if ((self._fdv - fechaActual) < 15):
+
+        if ((self._fdv - 2025) < 3):
             descuento += 0.25
         
         if (self._año < 2020):
@@ -44,12 +48,12 @@ class productoElectronico(Producto):
     
     def mostrarInfo(self):
         super().mostrarInfo()
-        return (f"Cantidad: {self._cantidad}")
+        return (f"Año:{self._año}")
     
 if __name__ == "__main__":
-    producto1 = productoAlimenticio("Banana", 1000, "20/06/2025", 5)
-    producto2 = productoElectronico("Microondas", 400000, None, 2018)
-    fechaActual = "2/6/2025" 
+    producto1 = productoAlimenticio("Banana", 1000,  datetime.strptime("12/06/2025", "%d/%m/%Y"), 5)
+    producto2 = productoElectronico("Microondas", 400000, 2034, 2018)
+    fechaActual = datetime.today()
     
     print(f"{producto1.mostrarInfo()} \nDescuento: {producto1.descuento(fechaActual)}")
     print(f"{producto2.mostrarInfo()} \nDescuento: {producto2.descuento(fechaActual)}")
