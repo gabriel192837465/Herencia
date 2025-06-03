@@ -1,0 +1,40 @@
+class Transporte():
+    def __init__(self, nombre, capacidad, vm): #vm = Velocidad Maxima Km/h
+        self._nombre = nombre
+        self._capacidad = capacidad 
+        self._vm = vm
+
+    def mostrarInfo(self):
+        return (f"'{self._nombre}': \nCapacidad: {self._capacidad} personas \nVelocidad maxima: {self._vm}Km/h")
+    
+    def tiempoDeViaje(self, distancia):
+        tiempo = distancia / self._vm
+        return (f"Tiempo en viajar {distancia}Km: {tiempo} horas")
+    
+class Avion(Transporte):
+    def __init__(self, capacidad, vm):
+        super().__init__("Avión", capacidad, vm)
+
+    def mostrarInfo(self):
+        return super().mostrarInfo()
+    
+    def tiempoDeViaje(self, distancia):
+        return super().tiempoDeViaje(distancia)
+
+class Barco(Transporte):
+    def __init__(self, capacidad, vm):
+        super().__init__("Barco", capacidad, vm)
+
+    def mostrarInfo(self):
+        return super().mostrarInfo()
+    
+    def tiempoDeViaje(self, distancia):
+        return super().tiempoDeViaje(distancia)
+    
+if __name__ == "__main__":
+    transporte1 = Avion(200, 800)
+    transporte2 = Barco(6000, 60)
+    distancia = 1600 #Kilometros
+
+    print(f"{transporte1.mostrarInfo()} \n {transporte1.tiempoDeViaje(distancia)} \n")
+    print(f"{transporte2.mostrarInfo()} \n {transporte2.tiempoDeViaje(distancia)}")
