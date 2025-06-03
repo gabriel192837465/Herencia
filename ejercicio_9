@@ -1,0 +1,69 @@
+class Tienda():
+    def __init__(self, nombre, inventario, direccion):
+        self._nombre = nombre
+        self._inventario = inventario
+        self._direccion = direccion
+
+    def mostrarInfo(self):
+        return (f"'{self._nombre}' \nProductos: {self._inventario} \nDirección: {self._direccion}")
+    
+class tiendaRopa(Tienda):
+    def __init__(self, inventario, direccion):
+        super().__init__("Tienda de ropa", inventario, direccion)
+
+    def agregarProducto(self, producto):
+        self._inventario.append(producto)
+        return (f"Inventario actualizado: {self._inventario}")
+
+    def eliminarProducto(self, producto):
+        for p in self._inventario:
+            if (p == producto):
+                self._inventario.remove(p)
+                return (f"Inventario actualizado: {self._inventario}")
+            else:
+                return ("No se encontró el producto")
+
+class tiendaElectronica(Tienda):
+    def __init__(self, inventario, direccion):
+        super().__init__("Tienda electronica", inventario, direccion)
+
+    def agregarProducto(self, producto):
+        self._inventario.append(producto)
+        return (f"Inventario actualizado: {self._inventario}")
+
+    def eliminarProducto(self, producto):
+        for p in self._inventario:
+            if (p == producto):
+                self._inventario.remove(p)
+                return (f"Inventario actualizado: {self._inventario}")
+            else:
+                return ("No se encontró el producto")
+    
+if __name__ == "__main__":
+    tienda1 = tiendaRopa(["remera", "pantalon", "campera", "botas", "gorro"], "boedo 860")
+    tienda2 = tiendaElectronica(["Microondas", "celular", "licuadora", "monitor 24 pulgadas Full HD"], "Independencia 1234")
+
+    print(f"{tienda1.mostrarInfo()} \n")
+    print(f"{tienda2.mostrarInfo()} \n")
+
+    r1 = int(input("Presionar 1: Editar inventario de la tienda de ropa \nPresionar 2: Editar inventario de la tienda electronica: "))
+
+    if (r1 == 1):
+        r2 = int(input("Presione 1 para agregar o 2 para eliminar un producto: "))
+
+        if (r2 == 1):
+            producto = input("Ingrese el producto para agregar: ")
+            print(tienda1.agregarProducto(producto))
+        elif (r2 == 2):
+            producto = input("Ingrese el producto para eliminar: ")
+            print(tienda1.eliminarProducto(producto))
+
+    elif (r1 == 2):
+        r2 = int(input("Presione 1 para agregar o 2 para eliminar un producto: "))
+
+        if (r2 == 1):
+            producto = input("Ingrese el producto para agregar: ")
+            print(tienda2.agregarProducto(producto))
+        elif (r2 == 2):
+            producto = input("Ingrese el producto para eliminar: ")
+            print(tienda2.eliminarProducto(producto))
