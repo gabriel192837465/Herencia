@@ -1,0 +1,52 @@
+from datetime import datetime
+
+class Pago():
+    def __init__(self, pago, monto, fecha):
+        self._pago = pago
+        self._monto = monto
+        self._fecha = fecha
+
+    def mostrarDetalles(self):
+        return (f"Tipo de pago: {self._pago} \nMonto: ${self._monto} \nFecha: {self._fecha}")
+    
+class pagoTarjeta(Pago):
+    def __init__(self, monto, fecha, tipo, titular):
+        super().__init__("Tarjeta", monto, fecha)
+        self._tipo = tipo #credito / debito
+        self._titular = titular
+
+    def mostrarDetalles(self):
+        return (f"{super().mostrarDetalles()} \nTipo de tarjeta: {self._tipo} \nTitular: {self._titular}")
+    
+    def procesarPago(self, fecha, monto):
+        self._fecha = fecha
+        self._monto = monto
+        return (f"Procesando nuevo pago: ('{self._fecha}', ${self._monto})")
+    
+    def Recibo(self):
+        return (f"Recibo: |{self._titular}| |{self._tipo}| |{self._fecha}| |${self._monto}|")
+
+class pagoPayPal(Pago):
+    def __init__(self, monto, fecha, cliente, vendedor):
+        super().__init__("Paypal", monto, fecha)
+        self._cliente = cliente
+        self._vendedor = vendedor
+
+    def mostrarDetalles(self):
+        return (f"{super().mostrarDetalles()} \nCliente: {self._cliente} \nVendedor: {self._vendedor}")
+    
+    def procesarPago(self, fecha, monto):
+        self._fecha = fecha
+        self._monto = monto
+        return (f"Procesando nuevo pago: ('{self._fecha}', ${self._monto})")
+    
+    def Recibo(self):
+        return (f"Recibo: |{self._cliente}| |{self._fecha}| |${self._monto}| |{self._vendedor}|")
+    
+if __name__ == "__main__":
+    fecha = datetime.today()
+    pago1 = pagoTarjeta(500, fecha, "Crédito", "Gabriel")
+    pago2 = pagoPayPal(1000, fecha, "Gabriel", "Pepe")
+        
+    print(f"{pago1.mostrarDetalles()} \n{pago1.procesarPago(fecha, 25)} \n{pago1.Recibo()} \n")
+    print(f"{pago2.mostrarDetalles()} \n{pago2.procesarPago(fecha, 25)} \n{pago2.Recibo()}")
